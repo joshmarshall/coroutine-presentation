@@ -1,0 +1,18 @@
+add 60
+wait 2
+chord 0.5 72 75 79
+wait 0.5
+chord 0.4 72 75 79
+chord 0.35 70 74 77
+chord 0.6 72 75 79
+wait 0.5
+chord 0.4 72 75 79
+chord 0.35 70 74 77
+chord 0.6 72 75 79
+wait 0.5
+chord 0.4 72 75 79
+chord 0.35 70 74 77
+chord 0.6 68 72 75
+wait 2
+remove 60
+quit
