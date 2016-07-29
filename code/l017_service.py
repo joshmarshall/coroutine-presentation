@@ -2,11 +2,15 @@ import aiohttp
 import asyncio
 import socket
 import unittest
+import uvloop
 
 import tornado.web
 from tornado.platform.asyncio import AsyncIOMainLoop
 
 from l015_testing import asynctest
+
+
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 
 async def fetch(url):
