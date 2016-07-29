@@ -8,3 +8,5 @@ generally attempt to keep fallacies to a minimum.
 
 The code expects Python 3.5.2, even though it demonstrates concepts dating back
 to 2.1/2.2.
+
+Video here: https://youtu.be/8JIOxiHUwIA?t=14m25s
