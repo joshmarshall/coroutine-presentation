@@ -1,5 +1,6 @@
 import asyncio
 import math
+import numpy
 import struct
 import sys
 import time
@@ -22,6 +23,7 @@ class Stream(object):
     async def start(self):
         last_sample = 0
         last_time = time.time()
+        constant = math.pi * 2 / SAMPLE_RATE
 
         while True:
             if self.stopped:
@@ -31,19 +33,19 @@ class Stream(object):
             last_time = time.time()
 
             samples = int(SAMPLE_RATE * diff)
-            offset = last_sample % SAMPLE_RATE
+            offset = last_sample % (SAMPLE_RATE * 10)
             last_sample = offset + samples
+            arange = numpy.arange(offset, last_sample) * constant
 
-            if samples:
-                r = normalize([
-                    sum([
-                        sample(freq, i, SAMPLE_RATE)
-                        for freq in self.frequencies
-                    ])
-                    for i in range(offset, last_sample)
-                ])
+            if samples and self.frequencies:
+                freq_factor = 1 / len(self.frequencies)
+                r = sum([
+                    numpy.sin(arange * freq) * 127 * freq_factor
+                    for freq in self.frequencies
+                ]) * MAX_AMPLITUDE + 127
 
-                sys.stdout.buffer.write(struct.pack('B' * samples, *r))
+                sys.stdout.buffer.write(
+                    struct.pack('B' * samples, *r.astype(int)))
                 sys.stdout.flush()
 
             await asyncio.sleep(max(SLEEP_TIME - diff, 0))
