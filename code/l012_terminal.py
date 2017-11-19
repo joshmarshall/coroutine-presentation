@@ -52,19 +52,20 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
 
     async def handle(term, message):
-        if message == "so long":
-            print("And thanks for all the fish.", file=sys.stderr)
-            term.stop()
-        elif message == "answer":
-            log_prompt("You aren't going to like it.")
-        elif message == "42":
-            log_prompt("But what is the ultimate question?")
-        elif message.startswith("http://"):
-            response = await aiohttp.request("GET", message)
-            await response.read()
-            log_prompt("Site responded with: {0}".format(response.status))
-        else:
-            log_prompt("No idea what you are saying.")
+        async with aiohttp.ClientSession() as session:
+            if message == "so long":
+                print("And thanks for all the fish.", file=sys.stderr)
+                term.stop()
+            elif message == "answer":
+                log_prompt("You aren't going to like it.")
+            elif message == "42":
+                log_prompt("But what is the ultimate question?")
+            elif message.startswith("http:") or message.startswith("https:"):
+                response = await session.get(message)
+                await response.read()
+                log_prompt("Site responded with: {0}".format(response.status))
+            else:
+                log_prompt("No idea what you are saying.")
 
     term = Terminal(loop)
     term.add_callback(handle)
