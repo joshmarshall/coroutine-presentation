@@ -1,5 +1,5 @@
 from code.jsonrpc import loads, msg
-from code.selector import READ, WRITE
+from code.selector import Selector, READ, WRITE
 import socket
 
 
@@ -65,3 +65,17 @@ class Server(object):
         del self.send_data[client_sock.fileno()]
         selector.remove_fd(client_sock, READ)
         selector.remove_fd(client_sock, WRITE)
+
+
+def main():
+    selector = Selector()
+
+    server = Server()
+    server.register(selector)
+
+    while True:
+        selector.wait()
+
+
+if __name__ == "__main__":
+    main()
