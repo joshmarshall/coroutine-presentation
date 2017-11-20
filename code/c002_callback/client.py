@@ -1,6 +1,7 @@
 from code.jsonrpc import loads, msg
-from code.selector import READ, WRITE
+from code.selector import Selector, READ, WRITE
 import socket
+import sys
 import time
 
 
@@ -61,3 +62,21 @@ class Client(object):
                 print("Server closed: {}".format(error))
                 self.cleanup(selector)
             self.send_data = b""
+
+
+def main():
+    selector = Selector()
+    host = sys.argv[1]
+    port = int(sys.argv[2])
+    clients = int(sys.argv[3]) if len(sys.argv) > 3 else 1
+
+    for i in range(clients):
+        client = Client(host, port)
+        client.register(selector)
+
+    while True:
+        selector.wait()
+
+
+if __name__ == "__main__":
+    main()
