@@ -23,6 +23,8 @@ Both presentation files (in Keynote and in PDF form) are included, although I
 recommend the PyTexas version for clarity / updates (it also includes Python
 3.6 features).
 
+You can view the slides online here: [PyTexas 2017 Slides](http://slides.com/joshmarshall/coroutines-in-python)
+
 ## Coding Examples
 
 The samples can appear a bit chaotic at first, so I've added a map for
