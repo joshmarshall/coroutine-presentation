@@ -4,8 +4,8 @@
 
 This presentation (and code) was delivered to:
 
-* PyTexas, November 19th, 2017
-* and Austin Web Python User Group on July 28th, 2016
+* [PyTexas, November 19th, 2017](https://youtu.be/Cj9xCnRg1VE)
+* [Austin Web Python User Group, July 28th, 2016](https://youtu.be/8JIOxiHUwIA?t=14m25s)
 
 It's intent was to cover the history of async Python programming, language
 evolution from iterators to generators to native coroutines, and provide
@@ -14,10 +14,6 @@ fallacies to a minimum.
 
 The code expects Python 3.6, even though it demonstrates concepts dating back
 to 2.1/2.2.
-
-Videos here:
-* (PyTexas video forthcoming)
-* AWPUG - https://youtu.be/8JIOxiHUwIA?t=14m25s
 
 Both presentation files (in Keynote and in PDF form) are included, although I
 recommend the PyTexas version for clarity / updates (it also includes Python
